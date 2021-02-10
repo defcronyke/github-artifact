@@ -1,18 +1,23 @@
-# Use the official Rust image.
-# https://hub.docker.com/_/rust
-FROM rust:slim
+FROM rust:alpine AS build-env
 
-# Copy local code to the container image.
-WORKDIR /usr/src/app
+WORKDIR /root/
+
 COPY src/ src/
 COPY Cargo.toml .
 
-# Install production dependencies and build a release artifact.
-RUN cargo build --release
+RUN apk --no-cache add openssl-dev musl-dev && \
+  cargo build --release
 
-# Service must listen to $PORT environment variable.
-# This default value facilitates local development.
+# ------------------------
+
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+
+COPY --from=build-env /root/target/release/github-artifact .
+
 ENV PORT 8080
 
-# Run the web service on container startup.
-CMD ["target/release/hellorust"]
+CMD ["./github-artifact"]

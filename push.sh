@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker push gcr.io/github-artifact/helloworld-rust:latest
+docker push gcr.io/github-artifact/github-artifact:latest
