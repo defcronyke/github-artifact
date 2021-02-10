@@ -1,0 +1,14 @@
+[package]
+name = "hellorust"
+version = "0.0.0"
+publish = false
+edition = "2018"
+
+[[bin]]
+name = "hellorust"
+path = "src/main.rs"
+
+[dependencies]
+hyper = { version = "0.14", features = ["full"] }
+tokio = { version = "1", features = ["full"] }
+pretty_env_logger = "0.4"
