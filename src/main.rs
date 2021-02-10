@@ -52,68 +52,44 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
 
     let repo = params.get("repo").unwrap_or(&repo_default);
 
-    let repo_parts: Vec<&str> = repo.split("/").collect();
+    let repo_parts: Vec<&str> = repo.split("@").collect();
 
     if repo_parts.len() != 2 {
         eprintln!("route called with invalid query params: {}", repo);
         return Ok(Response::new(Body::default()));
     }
 
-    let repo_user = repo_parts[0];
-    let repo_name = repo_parts[1];
+    let repo_parts2: Vec<&str> = repo_parts[0].split(":").collect();
+
+    if repo_parts2.len() != 2 {
+        eprintln!("route called with invalid auth query params: {}", repo);
+        return Ok(Response::new(Body::default()));
+    }
+
+    let user = repo_parts2[0];
+    let token = repo_parts2[1];
+
+    let repo_parts3: Vec<&str> = repo_parts[1].split("/").collect();
+
+    if repo_parts3.len() != 2 {
+        eprintln!("route called with invalid query params: {}", repo);
+        return Ok(Response::new(Body::default()));
+    }
+
+    let repo_user = repo_parts3[0];
+    let repo_name = repo_parts3[1];
 
     let default_auth_header = HeaderValue::from_static("Basic none");
 
-    let req_headers = req.headers();
-
-    let auth_parts: Vec<&str> = req_headers
-        .get(AUTHORIZATION)
-        .unwrap_or(&default_auth_header)
-        .to_str()
-        .unwrap()
-        .split(" ")
-        .collect();
-
-    if auth_parts.len() != 2 {
-        eprintln!(
-            "route called with invalid auth: {}",
-            &auth_parts.join(" ").to_string()
-        );
-        return Ok(Response::new(Body::default()));
-    }
-
-    let auth_parts2: Vec<&str> = auth_parts[1].split(":").collect();
-
-    if auth_parts2.len() != 2 {
-        eprintln!(
-            "route called with invalid formatted auth: {}",
-            &auth_parts.join(" ").to_string()
-        );
-        return Ok(Response::new(Body::default()));
-    }
-
-    let user = auth_parts2[0];
-    let token = auth_parts2[1];
-
     if user.chars().count() == 0 {
-        eprintln!(
-            "route called with invalid auth: empty user: {}",
-            &auth_parts.join(" ").to_string()
-        );
+        eprintln!("route called with invalid auth: empty user: {}", repo);
         return Ok(Response::new(Body::default()));
     }
 
     if token.chars().count() == 0 {
-        eprintln!(
-            "route called with invalid auth: empty token: {}",
-            &auth_parts.join(" ").to_string()
-        );
+        eprintln!("route called with invalid auth: empty token: {}", repo);
         return Ok(Response::new(Body::default()));
     }
-
-    println!("{}:{}", user, token);
-
-    // 'https://api.github.com/repos/' + repo_user + '/' + repo_name + '/actions/artifacts'
 
     let https = HttpsConnector::new();
     let client = Client::builder().build::<_, hyper::Body>(https);
@@ -139,18 +115,11 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
         HeaderValue::from_static("Google Cloud Run Web App"),
     );
 
-    // client_req_headers.append(
-    //     AUTHORIZATION,
-    //     HeaderValue::from_str(&format!("Basic {}:{}", user, token)).unwrap_or(default_auth_header),
-    // );
-
     let client_res = client.request(client_req).await?;
 
     println!("status: {}", client_res.status());
 
     let buf = hyper::body::to_bytes(client_res).await?;
-
-    println!("body: {:?}", buf);
 
     let artifacts_res: ArtifactsRes = serde_json::from_slice(&buf).unwrap_or_default();
 
@@ -158,11 +127,6 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
         "body parsed:\n{}",
         serde_json::to_string_pretty(&artifacts_res).unwrap_or_default()
     );
-
-    // let download_request_url: Vec<&str> = artifacts_res.artifacts[0]
-    //     .archive_download_url
-    //     .split("//")
-    //     .collect();
 
     let mut client_req = Request::builder()
         .method("GET")
