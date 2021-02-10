@@ -4,22 +4,23 @@
   const repo = urlParams.get('repo');
 
   if (!!repo) {
-    const repo_parts = repo.split('@');
+    // const repo_parts = repo.split('@');
     
-    if (repo_parts.length <= 1) {
-      return;
-    }
+    // if (repo_parts.length <= 1) {
+    //   return;
+    // }
 
-    const auth_parts = repo_parts[0].split(':');
+    // const auth_parts = repo_parts[0].split(':');
     
-    if (auth_parts.length <= 1) {
-      return;
-    }
+    // if (auth_parts.length <= 1) {
+    //   return;
+    // }
 
-    const user = auth_parts[0];
-    const token = auth_parts[1];
-
-    const repo_path_parts = repo_parts[1].split('/');
+    // const user = auth_parts[0];
+    // const token = auth_parts[1];
+    
+    const repo_path_parts = repo.split('/');
+    // const repo_path_parts = repo_parts[1].split('/');
 
     if (repo_path_parts.length <= 1) {
       return;
@@ -28,7 +29,7 @@
     const repo_user = repo_path_parts[0];
     const repo_name = repo_path_parts[1];
 
-    console.log('Getting github artifact: https://' + user + ':<redacted>@github.com/' + repo_user + '/' + repo_name);
+    console.log('Getting github artifact: https://github.com/' + repo_user + '/' + repo_name);
 
     // fetch('https://api.github.com/repos/' + repo_user + '/' + repo_name + '/actions/artifacts', {
     fetch('https://github-artifact-6yr4nbef3q-uc.a.run.app?repo=' + repo_user + '/' + repo_name + '/actions/artifacts', {
