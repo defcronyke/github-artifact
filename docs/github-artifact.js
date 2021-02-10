@@ -19,7 +19,7 @@
     const user = auth_parts[0];
     const token = auth_parts[1];
     
-    const repo_path_parts = repo.split('/');
+    const repo_path_parts = repo_parts[1].split('/');
     // const repo_path_parts = repo_parts[1].split('/');
 
     if (repo_path_parts.length <= 1) {
