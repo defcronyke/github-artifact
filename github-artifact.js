@@ -30,10 +30,11 @@
 
     console.log('Getting github artifact: https://' + user + ':<redacted>@github.com/' + repo_user + '/' + repo_name);
 
-    fetch('https://' + user + ':' + token + '@api.github.com/repos/' + repo_user + '/' + repo_name + '/actions/artifacts', {
+    fetch('https://api.github.com/repos/' + repo_user + '/' + repo_name + '/actions/artifacts', {
       credentials: 'include',
       headers: {
-        'Accept': 'application/vnd.github.v3+json'
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': 'Basic ' + user + ':' + token
       }
     }).then(function(res) {
       return res.json();
