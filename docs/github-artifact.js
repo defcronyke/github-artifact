@@ -3,6 +3,7 @@
 
   const repo = urlParams.get('repo');
   const file = urlParams.get('file');
+  const num = urlParams.get('num');
 
   if (!!repo) {
     const repo_parts = repo.split('@');
@@ -35,6 +36,10 @@
       url += '&file=' + file;
     }
 
-    window.location.replace('https://github-artifact-6yr4nbef3q-uc.a.run.app?repo=' + user + ':' + token + '@' + repo_user + '/' + repo_name);
+    if (!!num) {
+      url += '&num=' + num;
+    }
+
+    window.location.replace(url);
   }
 })();
