@@ -29,10 +29,10 @@
     const repo_user = repo_path_parts[0];
     const repo_name = repo_path_parts[1];
 
-    console.log('Getting github artifact: https://github.com/' + repo_user + '/' + repo_name);
+    console.log('Getting github artifact: https://api.github.com/repos/' + repo_user + '/' + repo_name + '/actions/artifacts');
 
     // fetch('https://api.github.com/repos/' + repo_user + '/' + repo_name + '/actions/artifacts', {
-    fetch('https://github-artifact-6yr4nbef3q-uc.a.run.app?repo=' + repo_user + '/' + repo_name + '/actions/artifacts', {
+    fetch('https://github-artifact-6yr4nbef3q-uc.a.run.app?repo=' + repo_user + '/' + repo_name, {
       credentials: 'include',
       headers: {
         'Accept': 'application/vnd.github.v3+json',
