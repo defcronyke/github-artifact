@@ -37,7 +37,7 @@
                   }
                 }
 
-                return { blob: res2.blob(), res: res2 };
+                return { filename: filename, blob: res2.blob(), res: res2 };
               })
               .then(function (res2) {
                 console.log('res2: ' + res2);
@@ -45,7 +45,7 @@
                 var url = window.URL.createObjectURL(res2.blob);
                 var a = document.createElement('a');
                 a.href = url;
-                a.download = res.filename;
+                a.download = res2.filename;
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
