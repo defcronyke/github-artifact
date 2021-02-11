@@ -46,19 +46,23 @@
                 console.log('res2:');
                 console.log(res2);
 
-                var url = window.URL.createObjectURL(res2.blob);
-                var a = document.createElement('a');
-                a.href = url;
-                a.download = res2.filename;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
+                res2.blob.then(function (res3) {
+                  var url = window.URL.createObjectURL(res3);
+                  var a = document.createElement('a');
+                  a.href = url;
+                  a.download = res2.filename;
+                  document.body.appendChild(a);
+                  a.click();
+                  a.remove();
 
-                console.log('clicked link: ' + url);
+                  console.log('clicked link: ' + url);
 
-                if (!!document.referrer) {
-                  window.location.replace(document.referrer);
-                }
+                  if (!!document.referrer) {
+                    window.location.replace(document.referrer);
+                  }
+                });
+
+
               });
           }
         }
