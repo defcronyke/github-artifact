@@ -7,30 +7,30 @@
       redirect: 'manual'
     })
       .then(function (res) {
-        console.log('res:');
-        console.log(res);
-
         if (!!res) {
           var fileUrl = res.url;
-
-          console.log('fileUrl: ' + fileUrl);
 
           var link = document.createElement('a');
           link.href = fileUrl;
           link.download = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
-          link.click();
 
-          var referrer = document.referrer;
+          link.addEventListener('click', function () {
+            console.log('download');
 
-          if (!!referrer) {
-            console.log('referrer: ' + referrer);
+            var referrer = document.referrer;
 
-            if (referrer !== window.location.href.split('?')[0]) {
-              window.setTimeout(function () {
-                window.location.replace(referrer);
-              }, 2000);
+            if (!!referrer) {
+              console.log('referrer: ' + referrer);
+
+              if (referrer !== window.location.href.split('?')[0]) {
+                window.setTimeout(function () {
+                  window.location.replace(referrer);
+                }, 2000);
+              }
             }
-          }
+          });
+
+          link.click();
         }
       });
   }
