@@ -25,7 +25,7 @@
               if (referrer !== window.location.href.split('?')[0]) {
                 window.setTimeout(function () {
                   window.location.replace(referrer);
-                }, 2000);
+                }, 3000);
               }
             }
           });
