@@ -12,10 +12,13 @@
         return { blob: res.blob(), res: res };
       })
       .then(function (res) {
-        console.log('res: ' + res);
+        console.log('res:');
+        console.log(res);
 
         if (!!res) {
           var fileUrl = res.res.headers.get('url');
+
+          console.log('fileUrl: ' + fileUrl);
 
           if (fileUrl) {
             fetch(fileUrl)
@@ -40,7 +43,8 @@
                 return { filename: filename, blob: res2.blob(), res: res2 };
               })
               .then(function (res2) {
-                console.log('res2: ' + res2);
+                console.log('res2:');
+                console.log(res2);
 
                 var url = window.URL.createObjectURL(res2.blob);
                 var a = document.createElement('a');
