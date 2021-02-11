@@ -11,12 +11,13 @@
       })
       .then(function (res) {
         if (!!res) {
-          return res;
+          var file = window.URL.createObjectURL(blob);
+          window.location.assign(file);
+
+          if (!!document.referrer) {
+            window.location.replace(document.referrer);
+          }
         }
       });
-
-    // if (!!document.referrer) {
-    //   window.location.replace(document.referrer);
-    // }
   }
 })();
