@@ -14,22 +14,6 @@
           link.href = fileUrl;
           link.download = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
 
-          link.addEventListener('click', function () {
-            console.log('download');
-
-            var referrer = document.referrer;
-
-            if (!!referrer) {
-              console.log('referrer: ' + referrer);
-
-              if (referrer !== window.location.href.split('?')[0]) {
-                window.setTimeout(function () {
-                  window.location.replace(referrer);
-                }, 3000);
-              }
-            }
-          });
-
           link.click();
         }
       });
