@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t gcr.io/github-artifact/github-artifact .
+docker build --build-arg artifact_auth="$ARTIFACT_AUTH" -t gcr.io/github-artifact/github-artifact .

@@ -1,4 +1,3 @@
-// #![deny(warnings)]
 #![warn(rust_2018_idioms)]
 
 use hyper::header::{
@@ -74,16 +73,28 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
 
     let repo_parts: Vec<&str> = repo.split("@").collect();
 
-    if repo_parts.len() != 2 {
-        eprintln!("route called with invalid query params: {}", repo);
-        return Ok(Response::new(Body::default()));
-    }
+    let repo_parts2: Vec<&str>;
+    let repo_parts3: Vec<&str>;
+    let auth_env = std::env::var("ARTIFACT_AUTH").unwrap_or_default();
 
-    let repo_parts2: Vec<&str> = repo_parts[0].split(":").collect();
+    if repo_parts.len() != 2 {
+        println!("Getting user and token from env.");
+
+        repo_parts2 = auth_env.split(":").collect();
+        repo_parts3 = repo.split("/").collect();
+    } else {
+        repo_parts2 = repo_parts[0].split(":").collect();
+        repo_parts3 = repo_parts[1].split("/").collect();
+    }
 
     if repo_parts2.len() != 2 {
         eprintln!("route called with invalid auth query params: {}", repo);
-        return Ok(Response::new(Body::default()));
+
+        let mut res = Response::new(Body::from("401 Unauthorized\n"));
+
+        *res.status_mut() = StatusCode::UNAUTHORIZED;
+
+        return Ok(res);
     }
 
     let user = repo_parts2[0];
@@ -94,11 +105,14 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
 
     println!("token: {}", token);
 
-    let repo_parts3: Vec<&str> = repo_parts[1].split("/").collect();
-
     if repo_parts3.len() != 2 {
         eprintln!("route called with invalid query params: {}", repo);
-        return Ok(Response::new(Body::default()));
+
+        let mut res = Response::new(Body::from("400 Bad Request\n"));
+
+        *res.status_mut() = StatusCode::BAD_REQUEST;
+
+        return Ok(res);
     }
 
     let repo_user = repo_parts3[0];
