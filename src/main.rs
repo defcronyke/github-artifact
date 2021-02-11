@@ -12,7 +12,7 @@ use hyper_tls::HttpsConnector;
 
 use serde::{Deserialize, Serialize};
 
-use base64::encode;
+use base64::{decode, encode};
 
 use std::collections::HashMap;
 
@@ -87,7 +87,12 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
     }
 
     let user = repo_parts2[0];
-    let token = repo_parts2[1];
+
+    let token_vec = decode(&repo_parts2[1]).unwrap_or(repo_parts2[1].as_bytes().to_vec());
+
+    let token = std::str::from_utf8(&token_vec).unwrap_or(&repo_parts2[1]);
+
+    println!("token: {}", token);
 
     let repo_parts3: Vec<&str> = repo_parts[1].split("/").collect();
 

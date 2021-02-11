@@ -42,5 +42,7 @@ Get the second oldest build artifact with a certain name:
   
 For example, get the most recent build artifact named "hobnob-release-windows-x86_64" from the GitHub repository "<a href="https://github.com/defcronyke/hobnob">https://github.com/defcronyke/hobnob</a>":<br>  
   
-[https://tinyurl.com/github-artifact?repo=defcronyke:be24b2023e0fa47e0155d32d8641c53a79ed4503@defcronyke/hobnob&file=hobnob-release-windows-x86_64](https://tinyurl.com/github-artifact?repo=defcronyke:be24b2023e0fa47e0155d32d8641c53a79ed4503@defcronyke/hobnob&file=hobnob-release-windows-x86_64)  
+[https://tinyurl.com/github-artifact?repo=defcronyke:Yjk1MzA1ZTgwMDdmZGIwM2MyMjA1ZGU0MGRkZDNjNjM1OGJjZTFiNQ==@defcronyke/hobnob&file=hobnob-release-windows-x86_64](https://tinyurl.com/github-artifact?repo=defcronyke:Yjk1MzA1ZTgwMDdmZGIwM2MyMjA1ZGU0MGRkZDNjNjM1OGJjZTFiNQ==@defcronyke/hobnob&file=hobnob-release-windows-x86_64)  
+  
+*NOTE: You can supply your GitHub token as either base64 (as above) or plain text.*  
   
