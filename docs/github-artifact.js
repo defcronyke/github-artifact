@@ -11,7 +11,7 @@
       })
       .then(function (res) {
         if (!!res) {
-          var file = window.URL.createObjectURL(blob);
+          var file = window.URL.createObjectURL(res);
           window.location.assign(file);
 
           if (!!document.referrer) {
