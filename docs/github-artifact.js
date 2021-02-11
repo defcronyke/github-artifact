@@ -31,6 +31,8 @@
           a.click();
           a.remove();
 
+          console.log('clicked link: ' + url);
+
           if (!!document.referrer) {
             window.location.replace(document.referrer);
           }
