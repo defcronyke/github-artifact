@@ -20,57 +20,62 @@
 
           console.log('fileUrl: ' + fileUrl);
 
-          if (fileUrl) {
-            fetch(fileUrl)
-              .then(function (res2) {
-                console.log('status2: ' + res2.status);
+          browser.downloads.download({
+            url: fileUrl,
+            conflictAction: 'uniquify'
+          });
 
-                var header = res2.headers.get('content-disposition');
-                var filename = 'downloaded.zip';
+          // if (fileUrl) {
+          //   fetch(fileUrl)
+          //     .then(function (res2) {
+          //       console.log('status2: ' + res2.status);
 
-                if (!!header) {
-                  var contentDispostion = header.split(';');
-                  var filenameToken = `filename*=UTF-8''`;
+          //       var header = res2.headers.get('content-disposition');
+          //       var filename = 'downloaded.zip';
 
-                  for (var thisValue of contentDispostion) {
-                    if (thisValue.trim().indexOf(filenameToken) === 0) {
-                      filename = decodeURIComponent(thisValue.trim().replace(filenameToken, ''));
-                      break;
-                    }
-                  }
-                }
+          //       if (!!header) {
+          //         var contentDispostion = header.split(';');
+          //         var filenameToken = `filename*=UTF-8''`;
 
-                return { filename: filename, blob: res2.blob(), res: res2 };
-              })
-              .then(function (res2) {
-                console.log('res2:');
-                console.log(res2);
+          //         for (var thisValue of contentDispostion) {
+          //           if (thisValue.trim().indexOf(filenameToken) === 0) {
+          //             filename = decodeURIComponent(thisValue.trim().replace(filenameToken, ''));
+          //             break;
+          //           }
+          //         }
+          //       }
 
-                res2.blob.then(function (res3) {
-                  window.open(res3, '_blank');
+          //       return { filename: filename, blob: res2.blob(), res: res2 };
+          //     })
+          //     .then(function (res2) {
+          //       console.log('res2:');
+          //       console.log(res2);
 
-                  // var url = window.URL.createObjectURL(res3);
-                  // var a = document.createElement('a');
-                  // a.href = url;
-                  // a.download = res2.filename;
-                  // document.body.appendChild(a);
-                  // a.click();
-                  // a.remove();
+          //       res2.blob.then(function (res3) {
+          //         window.open(res3, '_blank');
 
-                  // console.log('clicked link: ' + url);
+          //         // var url = window.URL.createObjectURL(res3);
+          //         // var a = document.createElement('a');
+          //         // a.href = url;
+          //         // a.download = res2.filename;
+          //         // document.body.appendChild(a);
+          //         // a.click();
+          //         // a.remove();
 
-                  if (!!document.referrer) {
-                    console.log('referrer: ' + document.referrer);
+          //         // console.log('clicked link: ' + url);
 
-                    window.setTimeout(function () {
-                      window.location.replace(document.referrer)
-                    }, 3000);
-                  }
-                });
-              });
+          //         if (!!document.referrer) {
+          //           console.log('referrer: ' + document.referrer);
+
+          //           window.setTimeout(function () {
+          //             window.location.replace(document.referrer)
+          //           }, 3000);
+          //         }
+          //       });
+          //     });
 
 
-          }
+          // }
         }
       });
   }
