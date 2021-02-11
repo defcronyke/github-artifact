@@ -53,7 +53,6 @@ from the GitHub repository <a href="https://github.com/defcronyke/hobnob">https:
   
 Important  
 =========  
-  
 These GitHub tokens need the "public_repo" scope to work properly, and unfortunately 
 that scope gives read/write access to the application making the GitHub API calls, so 
 if you want to use this to make any public links that you'll be sharing anywhere, you 
@@ -69,3 +68,10 @@ and it will use those values by default. For example:
 Take a look at the `build.sh` script for an example of how to build the Docker container,
 and see the `Dockerfile` for more details.  
   
+Extra Info  
+==========  
+If you prefer, you can use this website's URL [https://defcronyke.github.io/github-artifact](https://defcronyke.github.io/github-artifact) 
+as the base path for your links instead of [https://tinyurl.com/github-artifact](https://tinyurl.com/github-artifact). 
+For example:  
+  
+[https://defcronyke.github.io/github-artifact?repo=defcronyke/hobnob&file=hobnob-release-windows-x86_64](https://defcronyke.github.io/github-artifact?repo=defcronyke/hobnob&file=hobnob-release-windows-x86_64)  
