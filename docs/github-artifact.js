@@ -26,13 +26,10 @@
             console.log('referrer: ' + referrer);
 
             if (referrer !== window.location.href.split('?')[0]) {
-              window.location.replace(referrer);
+              window.setTimeout(function () {
+                window.location.replace(referrer);
+              }, 10000);
             }
-
-
-            // window.setTimeout(function () {
-            //   window.location.replace(document.referrer)
-            // }, 3000);
           }
         }
       });
