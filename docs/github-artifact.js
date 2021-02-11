@@ -47,15 +47,17 @@
                 console.log(res2);
 
                 res2.blob.then(function (res3) {
-                  var url = window.URL.createObjectURL(res3);
-                  var a = document.createElement('a');
-                  a.href = url;
-                  a.download = res2.filename;
-                  document.body.appendChild(a);
-                  a.click();
-                  a.remove();
+                  window.open(res3, '_blank');
 
-                  console.log('clicked link: ' + url);
+                  // var url = window.URL.createObjectURL(res3);
+                  // var a = document.createElement('a');
+                  // a.href = url;
+                  // a.download = res2.filename;
+                  // document.body.appendChild(a);
+                  // a.click();
+                  // a.remove();
+
+                  // console.log('clicked link: ' + url);
 
                   if (!!document.referrer) {
                     console.log('referrer: ' + document.referrer);
