@@ -16,7 +16,7 @@
         console.log(res);
 
         if (!!res) {
-          var fileUrl = res.res.headers.get('url');
+          var fileUrl = res.res.url;
 
           console.log('fileUrl: ' + fileUrl);
 
