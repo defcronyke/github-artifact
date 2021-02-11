@@ -5,6 +5,9 @@
   if (!!urlParams.get(atob('cmVwbw=='))) {
     fetch(atob('aHR0cHM6Ly9naXRodWItYXJ0aWZhY3QtNnlyNG5iZWYzcS11Yy5hLnJ1bi5hcHAv') + queryString)
       .then(function (res) {
+        console.log('status: ' + res.status);
+        console.log('location header: ' + res.headers.get('location'));
+
         if (res.status === 302) {
           var header = res.headers.get('content-disposition');
           var contentDispostion = header.split(';');
