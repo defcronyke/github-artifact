@@ -20,10 +20,10 @@
 
           console.log('fileUrl: ' + fileUrl);
 
-          browser.downloads.download({
-            url: fileUrl,
-            conflictAction: 'uniquify'
-          });
+          var link = document.createElement('a');
+          link.href = fileUrl;
+          link.download = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
+          link.click();
 
           // if (fileUrl) {
           //   fetch(fileUrl)
