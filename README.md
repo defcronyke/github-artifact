@@ -1,5 +1,7 @@
 # GitHub Artifact  
   
+[![sponsor the project](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/defcronyke)](https://github.com/sponsors/defcronyke)  
+  
 Website: [https://defcronyke.github.io/github-artifact](https://defcronyke.github.io/github-artifact)  
   
 Copyright © 2021 [Jeremy Carter](https://eternalvoid.net) - [jeremy@jeremycarter.ca](mailto:jeremy@jeremycarter.ca)  
