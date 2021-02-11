@@ -88,7 +88,7 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
     }
 
     if repo_parts2.len() != 2 {
-        eprintln!("route called with invalid auth query params: {}", repo);
+        eprintln!("route called with invalid auth query params.");
 
         let mut res = Response::new(Body::from("401 Unauthorized\n"));
 
@@ -103,10 +103,8 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
 
     let token = std::str::from_utf8(&token_vec).unwrap_or(&repo_parts2[1]);
 
-    println!("token: {}", token);
-
     if repo_parts3.len() != 2 {
-        eprintln!("route called with invalid query params: {}", repo);
+        eprintln!("route called with invalid query params.");
 
         let mut res = Response::new(Body::from("400 Bad Request\n"));
 
@@ -121,12 +119,12 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
     let default_auth_header = HeaderValue::from_static("Basic none");
 
     if user.chars().count() == 0 {
-        eprintln!("route called with invalid auth: empty user: {}", repo);
+        eprintln!("route called with invalid auth: empty user");
         return Ok(Response::new(Body::default()));
     }
 
     if token.chars().count() == 0 {
-        eprintln!("route called with invalid auth: empty token: {}", repo);
+        eprintln!("route called with invalid auth: empty token");
         return Ok(Response::new(Body::default()));
     }
 
@@ -172,11 +170,6 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
     println!("artifact lookup response body:\n{:?}", &buf);
 
     let artifacts_res: ArtifactsRes = serde_json::from_slice(&buf).unwrap_or_default();
-
-    println!(
-        "artifacts:\n{}",
-        serde_json::to_string_pretty(&artifacts_res).unwrap_or_default()
-    );
 
     let parsed_num: i64 = num.parse().unwrap_or_default();
 
@@ -273,10 +266,7 @@ async fn index1(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
         .to_str()
         .unwrap();
 
-    println!(
-        "artifact download link (expires in 1 minute): {}",
-        final_link
-    );
+    println!("Got artifact download link (expires in 1 minute).");
 
     *body.body_mut() = Body::from(format!(
         "artifact download link (expires in 1 minute): {} (id: {}, created: {}): {}\n",
