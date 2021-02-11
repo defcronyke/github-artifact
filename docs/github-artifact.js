@@ -1,3 +1,7 @@
 (function() {
-    window.location.replace('https://tinyurl.com/github-artifact' + window.location.search);
+  const urlParams = window.location.search;
+
+  if (!!urlParams) {
+    window.location.replace('https://tinyurl.com/github-artifact' + urlParams);
+  }
 })();
