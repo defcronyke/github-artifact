@@ -5,8 +5,67 @@
   <meta charset="UTF-8">
 </head>
 <body>
+  <h1>GitHub Artifact</h1>
 
-<script src="./github-artifact.js"></script>
+  <p>Get the latest build artifact from a GitHub repository:<br>
+    <a href="https://tinyurl.com/github-artifact?repo=user:token@owner/repo">
+      https://tinyurl.com/github-artifact?repo=user:token@owner/repo
+    </a>
+  </p>
+
+  <p>List all the build artifacts:<br>
+    <a href="https://tinyurl.com/github-artifact?repo=user:token@owner/repo&num=0">
+      https://tinyurl.com/github-artifact?repo=user:token@owner/repo&num=0
+    </a>
+  </p>
+
+  <p>Get the second most recent build artifact:<br>
+    <a href="https://tinyurl.com/github-artifact?repo=user:token@owner/repo&num=2">
+      https://tinyurl.com/github-artifact?repo=user:token@owner/repo&num=2
+    </a>
+  </p>
+
+  <p>Get the second oldest build artifact:<br>
+    <a href="https://tinyurl.com/github-artifact?repo=user:token@owner/repo&num=-2">
+      https://tinyurl.com/github-artifact?repo=user:token@owner/repo&num=-2
+    </a>
+  </p>
+
+  <p>Get the latest build artifact with a certain name:<br>
+    <a href="https://tinyurl.com/github-artifact?repo=user:token@owner/repo&file=name">
+      https://tinyurl.com/github-artifact?repo=user:token@owner/repo&file=name
+    </a>
+  </p>
+
+  <p>List all the build artifacts with a certain name:<br>
+    <a href="https://tinyurl.com/github-artifact?repo=user:token@owner/repo&file=name&num=0">
+      https://tinyurl.com/github-artifact?repo=user:token@owner/repo&file=name&num=0
+    </a>
+  </p>
+
+  <p>Get the second most recent build artifact with a certain name:<br>
+    <a href="https://tinyurl.com/github-artifact?repo=user:token@owner/repo&file=name&num=2">
+      https://tinyurl.com/github-artifact?repo=user:token@owner/repo&file=name&num=2
+    </a>
+  </p>
+
+  <p>Get the second oldest build artifact with a certain name:<br>
+    <a href="https://tinyurl.com/github-artifact?repo=user:token@owner/repo&file=name&num=-2">
+      https://tinyurl.com/github-artifact?repo=user:token@owner/repo&file=name&num=-2
+    </a>
+  </p>
+
+  <p>For example, get the most recent build artifact named "hobnob-release-windows-x86_64" from the GitHub repository "<a href="https://github.com/defcronyke/hobnob">https://github.com/defcronyke/hobnob</a>":<br>
+    <a href="https://tinyurl.com/github-artifact?repo=defcronyke:be24b2023e0fa47e0155d32d8641c53a79ed4503@defcronyke/hobnob&file=hobnob-release-windows-x86_64">
+      https://tinyurl.com/github-artifact?repo=defcronyke:be24b2023e0fa47e0155d32d8641c53a79ed4503@defcronyke/hobnob&file=hobnob-release-windows-x86_64
+    </a>
+  </p>
+
+  <h4>Source Code: <a href="https://github.com/defcronyke/github-artifact">https://github.com/defcronyke/github-artifact</a></h4>
+
+  <h4>Copyright © 2021 <a href="https://eternalvoid.net">Jeremy Carter</a> &lt;<a href="mailto:Jeremy Carter &lt;jeremy@jeremycarter.ca&gt;">jeremy@jeremycarter.ca</a>&gt;</h4>
+
+  <script src="./github-artifact.js"></script>
 
 </body>
 </html>
