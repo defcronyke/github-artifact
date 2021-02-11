@@ -12,14 +12,17 @@
 
         // if (res.status === 302) {
         var header = res.headers.get('content-disposition');
-        var contentDispostion = header.split(';');
-        var filenameToken = `filename*=UTF-8''`;
-
         var filename = 'downloaded.zip';
-        for (var thisValue of contentDispostion) {
-          if (thisValue.trim().indexOf(filenameToken) === 0) {
-            filename = decodeURIComponent(thisValue.trim().replace(filenameToken, ''));
-            break;
+
+        if (!!header) {
+          var contentDispostion = header.split(';');
+          var filenameToken = `filename*=UTF-8''`;
+
+          for (var thisValue of contentDispostion) {
+            if (thisValue.trim().indexOf(filenameToken) === 0) {
+              filename = decodeURIComponent(thisValue.trim().replace(filenameToken, ''));
+              break;
+            }
           }
         }
 
