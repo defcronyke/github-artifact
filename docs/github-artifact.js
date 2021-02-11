@@ -20,8 +20,15 @@
           link.download = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
           link.click();
 
-          if (!!document.referrer) {
-            console.log('referrer: ' + document.referrer);
+          var referrer = document.referrer;
+
+          if (!!referrer) {
+            console.log('referrer: ' + referrer);
+
+            if (referrer !== window.location.href.split('?')[0]) {
+              window.location.replace(referrer);
+            }
+
 
             // window.setTimeout(function () {
             //   window.location.replace(document.referrer)
