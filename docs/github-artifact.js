@@ -28,7 +28,7 @@
             if (referrer !== window.location.href.split('?')[0]) {
               window.setTimeout(function () {
                 window.location.replace(referrer);
-              }, 3000);
+              }, 1000);
             }
           }
         }
