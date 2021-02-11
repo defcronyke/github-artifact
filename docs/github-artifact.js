@@ -58,12 +58,16 @@
                   console.log('clicked link: ' + url);
 
                   if (!!document.referrer) {
-                    window.location.replace(document.referrer);
+                    console.log('referrer: ' + document.referrer);
+
+                    window.setTimeout(function () {
+                      window.location.replace(document.referrer)
+                    }, 3000);
                   }
                 });
-
-
               });
+
+
           }
         }
       });
