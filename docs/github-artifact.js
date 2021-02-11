@@ -10,23 +10,25 @@
         console.log('status: ' + res.status);
         console.log('location header: ' + res.headers.get('location'));
 
-        if (res.status === 302) {
-          var header = res.headers.get('content-disposition');
-          var contentDispostion = header.split(';');
-          var filenameToken = `filename*=UTF-8''`;
+        // if (res.status === 302) {
+        var header = res.headers.get('content-disposition');
+        var contentDispostion = header.split(';');
+        var filenameToken = `filename*=UTF-8''`;
 
-          var filename = 'downloaded.zip';
-          for (var thisValue of contentDispostion) {
-            if (thisValue.trim().indexOf(filenameToken) === 0) {
-              filename = decodeURIComponent(thisValue.trim().replace(filenameToken, ''));
-              break;
-            }
+        var filename = 'downloaded.zip';
+        for (var thisValue of contentDispostion) {
+          if (thisValue.trim().indexOf(filenameToken) === 0) {
+            filename = decodeURIComponent(thisValue.trim().replace(filenameToken, ''));
+            break;
           }
-
-          return { filename: filename, blob: res.blob() };
         }
+
+        return { filename: filename, blob: res.blob(), location: res.headers.get('location'), res: res };
+        // }
       })
       .then(function (res) {
+        console.log(res);
+
         if (!!res) {
           var url = window.URL.createObjectURL(res.blob);
           var a = document.createElement('a');
